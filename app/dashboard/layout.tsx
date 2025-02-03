@@ -1,6 +1,6 @@
 // export const experimental_ppr = true;
 
-import SideNav from "../ui/SideNav";
+import SideNav from "../ui/sidenav";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
