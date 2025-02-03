@@ -32,7 +32,7 @@ const Page = async (props: {
           key={query + currentPage}
           fallback={<DashboardLatestTransactionsSkeleton />}
         >
-          <LatestTransactions query={query} currentPage={currentPage} />
+          <LatestTransactions />
         </Suspense>
       </div>
     </div>
