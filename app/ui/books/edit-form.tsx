@@ -24,7 +24,7 @@ const EditForm = ({book}: {book: BookForm}) => {
           name="book_name"
           id="book_name"
           defaultValue={book.name}
-          className="border rounded-lg p-3"
+          className="border rounded-lg p-3 mt-1"
           aria-describedby="book-name-error"
         />
       </div>
@@ -45,7 +45,7 @@ const EditForm = ({book}: {book: BookForm}) => {
           name="book_category"
           id="book_category"
           defaultValue={book.category}
-          className="border rounded-lg p-3"
+          className="border rounded-lg p-3 mt-1"
           aria-describedby="book-category-error"
         />
       </div>
@@ -68,7 +68,7 @@ const EditForm = ({book}: {book: BookForm}) => {
           name="book_quantity"
           id="book_quantity"
           defaultValue={book.quantity}
-          className="border rounded-lg p-3"
+          className="border rounded-lg p-3 mt-1"
           aria-describedby="book-quantity-error"
         />
       </div>

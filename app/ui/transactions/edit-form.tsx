@@ -7,6 +7,8 @@ const EditForm = async({transaction}: {transaction: (Transactions & Customers)})
   const book = await fetchBookQuantity(transaction.book_id);
   const updateTransactionById = updateTransaction.bind(null, transaction.id);
 
+  const className = "border rounded-lg p-3 mt-1";
+
   return (
     <form action={updateTransactionById} className="flex flex-col gap-6">
         <div className="inline-grid">
@@ -16,7 +18,7 @@ const EditForm = async({transaction}: {transaction: (Transactions & Customers)})
           name="book_id"
           id="book_id"
           defaultValue={transaction.book_id}
-          className="border rounded-lg p-3 bg-gray-100"
+          className={`${className} bg-gray-100`}
           readOnly
         />
       </div>
@@ -27,7 +29,7 @@ const EditForm = async({transaction}: {transaction: (Transactions & Customers)})
           name="book_quantity"
           id="book_quantity"
           defaultValue={book.quantity}
-          className="border rounded-lg p-3 bg-gray-100"
+          className={`${className} bg-gray-100`}
           readOnly
         />
       </div>
@@ -38,7 +40,7 @@ const EditForm = async({transaction}: {transaction: (Transactions & Customers)})
           name="customer_name"
           id="customer_name"
           defaultValue={transaction.name}
-          className="border rounded-lg p-3"
+          className={`${className}`}
           readOnly
         />
       </div>
@@ -49,7 +51,7 @@ const EditForm = async({transaction}: {transaction: (Transactions & Customers)})
           name="customer_email"
           id="customer_email"
           defaultValue={transaction.email}
-          className="border rounded-lg p-3"
+          className={`${className}`}
           readOnly
         />
       </div>
@@ -60,7 +62,7 @@ const EditForm = async({transaction}: {transaction: (Transactions & Customers)})
           name="book_name"
           id="book_name"
           defaultValue={transaction.book_name}
-          className="border rounded-lg p-3"
+          className={`${className}`}
           readOnly
         />
       </div>
@@ -71,7 +73,7 @@ const EditForm = async({transaction}: {transaction: (Transactions & Customers)})
           name="book_category"
           id="book_category"
           defaultValue={transaction.book_category}
-          className="border rounded-lg p-3"
+          className={`${className}`}
           readOnly
         />
       </div>
@@ -82,7 +84,7 @@ const EditForm = async({transaction}: {transaction: (Transactions & Customers)})
           name="date_borrowed"
           id="date_borrowed"
           defaultValue={formatDateToLocal(transaction.date_borrowed)}
-          className="border rounded-lg p-3"
+          className={`${className}`}
           readOnly
         />
       </div>
@@ -92,7 +94,7 @@ const EditForm = async({transaction}: {transaction: (Transactions & Customers)})
           type="date"
           name="date_returned"
           id="date_returned"
-          className="border rounded-lg p-3"
+          className={`${className}`}
         />
       </div>
       

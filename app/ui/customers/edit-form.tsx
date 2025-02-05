@@ -9,6 +9,8 @@ const EditForm = ({customer}: {customer: Customers}) => {
     const updateCustomerWithId = udpateCustomer.bind(null, customer.id);
     const [state, formAction] = useActionState(updateCustomerWithId, initialState);
 
+    const className = "border rounded-lg p-3 mt-1";
+
   return (
     <form action={formAction} className="flex flex-col gap-6">
       <div className="inline-grid">
@@ -18,7 +20,7 @@ const EditForm = ({customer}: {customer: Customers}) => {
           name="customer_name"
           id="customer_name"
           defaultValue={customer.name}
-          className="border rounded-lg p-3"
+          className={`${className}`}
            aria-describedby="customer-name-error"
         />
       </div>
@@ -37,7 +39,7 @@ const EditForm = ({customer}: {customer: Customers}) => {
           name="customer_email"
           id="customer_email"
           defaultValue={customer.email}
-          className="border rounded-lg p-3"
+          className={`${className}`}
            aria-describedby="customer-email-error"
         />
       </div>
@@ -56,7 +58,7 @@ const EditForm = ({customer}: {customer: Customers}) => {
           name="customer_address"
           id="customer_address"
           defaultValue={customer.address}
-          className="border rounded-lg p-3"
+          className={`${className}`}
            aria-describedby="customer-address-error"
         />
       </div>
@@ -75,7 +77,7 @@ const EditForm = ({customer}: {customer: Customers}) => {
           name="customer_contact"
           id="customer_contact"
           defaultValue={customer.contact}
-          className="border rounded-lg p-3"
+          className={`${className}`}
           aria-describedby="customer-contact-error"
         />
       </div>

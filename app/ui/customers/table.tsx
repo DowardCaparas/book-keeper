@@ -1,5 +1,7 @@
 import { fetchFilteredCustomers } from "@/app/lib/data";
-import { DeleteCustomer, UpdateCustomer } from "./buttons";
+import { DeleteItem } from "../confirm-delete-data-modal";
+import { deleteCustomer } from "@/app/lib/actions";
+import { GoToEditPage } from "../go-to-edit-page-button";
 
 const CustomerTable = async ({
   query,
@@ -37,8 +39,8 @@ const CustomerTable = async ({
               <td className="whitespace-nowrap p-3">{customer.contact}</td>
               <td className="whitespace-nowrap py-3 pl-6 pr-3">
                 <div className="flex justify-end gap-3">
-                  <UpdateCustomer id={customer.id} />
-                  <DeleteCustomer id={customer.id} />
+                  <GoToEditPage id={customer.id}/>
+                  <DeleteItem id={customer.id} itemName={customer.name} deleteFunction={deleteCustomer}/>
                 </div>
               </td>
             </tr>
@@ -61,8 +63,8 @@ const CustomerTable = async ({
               <span className="font-medium">{customer.contact}</span>
             </div>
            <div className="flex gap-3">
-            <UpdateCustomer id={customer.id}/>
-            <DeleteCustomer id={customer.id}/>
+            <GoToEditPage id={customer.id}/>
+            <DeleteItem id={customer.id} itemName={customer.name} deleteFunction={deleteCustomer}/>
            </div>
           </div>
         ))}

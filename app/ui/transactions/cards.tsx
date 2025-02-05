@@ -1,7 +1,9 @@
 import { fetchFilteredTransactions } from "@/app/lib/data";
 import { TransactionCardProps } from "@/app/lib/definition";
-import { DeleteTransaction, UpdateTransaction } from "./buttons";
 import { formatDateToLocal } from "@/app/lib/utils";
+import { DeleteItem } from "../confirm-delete-data-modal";
+import { deleteTransaction } from "@/app/lib/actions";
+import { GoToEditPage } from "../go-to-edit-page-button";
 
 const TransactionCards = async ({
   query,
@@ -46,7 +48,7 @@ const Card = ({
           <span className="text-xl max-md:text-lg font-medium">{name}</span>
           <span className="text-sm">{email}</span>
         </div>
-        <DeleteTransaction id={id} />
+        <DeleteItem id={id} itemName={name} deleteFunction={deleteTransaction}/>
       </div>
 
       <div className="my-7 flex flex-col gap-2 text-sm">
@@ -73,7 +75,7 @@ const Card = ({
           </span>
         </span>
       </div>
-      <UpdateTransaction id={id} />
+      <GoToEditPage id={id}/>
     </div>
   );
 };

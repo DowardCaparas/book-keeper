@@ -1,6 +1,9 @@
 import { fetchFilteredBooks } from "@/app/lib/data";
 import { formatDateToLocal } from "@/app/lib/utils";
-import { BorrowBook, DeleteBook, UpdateBook } from "./buttons";
+import { BorrowBook } from "./buttons";
+import { deleteBook } from "@/app/lib/actions";
+import { DeleteItem } from "../confirm-delete-data-modal";
+import { GoToEditPage } from "../go-to-edit-page-button";
 
 // Fetching data from database
 
@@ -53,8 +56,8 @@ const BooksTable = async ({
               <td className="whitespace-nowrap py-3 pl-6 pr-3">
                 <div className="flex justify-end gap-3">
                   {book.quantity > 0 && <BorrowBook id={book.id} />}
-                  <UpdateBook id={book.id} />
-                  <DeleteBook id={book.id} />
+                  <GoToEditPage id={book.id}/>
+                  <DeleteItem id={book.id} itemName={book.name} deleteFunction={deleteBook}/>
                 </div>
               </td>
             </tr>
@@ -73,7 +76,7 @@ const BooksTable = async ({
                 </span>
                 <span>{book.category}</span>
               </div>
-              <UpdateBook id={book.id} />
+              <GoToEditPage id={book.id}/>
             </div>
             <div className="my-8">
               <span className="flex justify-between items-center">
@@ -95,7 +98,7 @@ const BooksTable = async ({
             </div>
             <div className="flex gap-3">
               {book.quantity > 0 && <BorrowBook id={book.id} />}
-              <DeleteBook id={book.id} />
+              <DeleteItem id={book.id} itemName={book.name} deleteFunction={deleteBook}/>
             </div>
           </div>
         ))}

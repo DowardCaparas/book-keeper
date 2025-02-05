@@ -40,3 +40,12 @@ export type TransactionCardProps = {
     dateBorrowed: string;
     dateReturned: string;
 }
+
+export type ConfirmationModalProps = {
+    isModalOpen: boolean;
+    onClose: () => void;
+    onConfirm: () => void;
+    isDeleting: boolean;
+    title: string;
+    message: string;
+}

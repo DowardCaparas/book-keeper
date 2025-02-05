@@ -7,6 +7,8 @@ const CreateForm = () => {
   const initialState: CustomerFormState = { message: null, errors: {} };
   const [state, formAction] = useActionState(addCustomer, initialState);
 
+  const className = "border rounded-lg p-3 mt-1";
+
   return (
     <form action={formAction} className="flex flex-col gap-6">
 
@@ -21,7 +23,7 @@ const CreateForm = () => {
           type="text"
           name="customer_name"
           id="customer_name"
-          className="border rounded-lg p-3"
+          className={`${className}`}
           aria-describedby="customer-name-error"
         />
       </div>
@@ -41,7 +43,7 @@ const CreateForm = () => {
           type="text"
           name="customer_email"
           id="customer_email"
-          className="border rounded-lg p-3"
+          className={`${className}`}
           aria-describedby="customer-email-error"
         />
       </div>
@@ -61,7 +63,7 @@ const CreateForm = () => {
           type="text"
           name="customer_address"
           id="customer_address"
-          className="border rounded-lg p-3"
+          className={`${className}`}
           aria-describedby="customer-address-error"
         />
       </div>
@@ -82,7 +84,7 @@ const CreateForm = () => {
           type="text"
           name="customer_contact"
           id="customer_contact"
-          className="border rounded-lg p-3"
+          className={`${className}`}
           aria-describedby="customer-contact-error"
         />
       </div>

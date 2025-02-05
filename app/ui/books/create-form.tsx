@@ -7,6 +7,8 @@ const CreateForm = () => {
   const initialState: BookAddFormState = { message: null, errors: {} };
   const [state, formAction] = useActionState(addBook, initialState);
 
+  const className = "border rounded-lg p-3 mt-1";
+
   return (
     <form action={formAction} className="flex flex-col gap-6">
       {/* Display validation message */}
@@ -20,7 +22,7 @@ const CreateForm = () => {
           type="text"
           name="book_name"
           id="book_name"
-          className="border rounded-lg p-3"
+          className={`${className}`}
           aria-describedby="book-name-error"
         />
       </div>
@@ -39,7 +41,7 @@ const CreateForm = () => {
           type="text"
           name="book_category"
           id="book_category"
-          className="border rounded-lg p-3"
+          className={`${className}`}
           aria-describedby="book-category-error"
         />
       </div>
@@ -56,7 +58,7 @@ const CreateForm = () => {
           type="text"
           name="book_quantity"
           id="book_quantity"
-          className="border rounded-lg p-3"
+          className={`${className}`}
           defaultValue="1"
           aria-describedby="book-quantity-error"
         />
@@ -77,7 +79,7 @@ const CreateForm = () => {
           type="text"
           name="book_status"
           id="book_status"
-          className="border rounded-lg p-3 bg-gray-200"
+          className={`${className} bg-gray-200`}
           defaultValue="Available"
           readOnly
         />
