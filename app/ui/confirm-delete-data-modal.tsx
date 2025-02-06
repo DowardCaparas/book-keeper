@@ -6,10 +6,12 @@ import { useState, useTransition } from "react";
 
 export const DeleteItem = ({
   id,
+  title,
   itemName,
   deleteFunction,
 }: {
   id: string;
+  title: string;
   itemName: string;
   deleteFunction: (id: string) => Promise<void>;
 }) => {
@@ -24,7 +26,7 @@ export const DeleteItem = ({
   };
 
   return (
-    <div>
+    <div className="max-xl:w-full">
       <button
         onClick={() => setIsModalOpen(true)}
         className="rounded-md border p-2 hover:bg-gray-100 w-full"
@@ -46,7 +48,7 @@ export const DeleteItem = ({
         onClose={() => setIsModalOpen(false)}
         onConfirm={handleDelete}
         isDeleting={isPending}
-        title="Delete Book"
+        title={title}
         message={`Confirm if you want to delete "${itemName}"`}
       />
     </div>
@@ -65,9 +67,17 @@ export const ConfirmationModal = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-[50%]">
-        <h2 className="text-lg font-semibold">{title}</h2>
-        <p className="mt-2 text-gray-600">{message}</p>
+      <div className="bg-white p-6 rounded-lg shadow-lg md:w-[50%] w-[90%]">
+       <div className="flex gap-2 items-center">
+        <Image
+          src="/trash.svg"
+          alt="trash icon"
+          width={18}
+          height={18}
+        />
+         <h2 className="text-lg font-semibold">{title}</h2>
+       </div>
+        <p className="mt-2 text-gray-600 text-sm">{message}</p>
         <div className="mt-4 flex justify-end gap-3">
           <button
             onClick={onClose}

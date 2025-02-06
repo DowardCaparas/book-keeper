@@ -3,7 +3,7 @@ import { TransactionCardProps } from "@/app/lib/definition";
 import { formatDateToLocal } from "@/app/lib/utils";
 import { DeleteItem } from "../confirm-delete-data-modal";
 import { deleteTransaction } from "@/app/lib/actions";
-import { GoToEditPage } from "../go-to-edit-page-button";
+import Link from "next/link";
 
 const TransactionCards = async ({
   query,
@@ -48,7 +48,6 @@ const Card = ({
           <span className="text-xl max-md:text-lg font-medium">{name}</span>
           <span className="text-sm">{email}</span>
         </div>
-        <DeleteItem id={id} itemName={name} deleteFunction={deleteTransaction}/>
       </div>
 
       <div className="my-7 flex flex-col gap-2 text-sm">
@@ -75,7 +74,38 @@ const Card = ({
           </span>
         </span>
       </div>
-      <GoToEditPage id={id}/>
+
+      {/* If the date returned is null go to edit page, otherwise delete it. */}
+      <div className="flex gap-3">
+        {dateReturned !== null ? (
+          <>
+            <Link
+              href={`/dashboard/transactions/${id}/edit/date-returned`}
+              className="rounded-md py-2 px-4 bg-black hover:bg-opacity-80 active:bg-opacity-90
+                    max-xl:w-full text-center font-medium text-white"
+            >
+              <span className="sr-only">Edit Date Returned</span>
+              <span>Edit date returned</span>
+            </Link>
+            <DeleteItem
+              id={id}
+              itemName={name}
+              title="Delete Transaction"
+              deleteFunction={deleteTransaction}
+            />
+          </>
+        ) : (
+          // Go to edit page to return book
+          <Link
+            href={`/dashboard/transactions${id}/edit/date-returned`}
+            className="rounded-md py-2 px-4 bg-green-600 hover:bg-green-700 active:bg-green-600 
+                    text-white max-xl:w-full text-center font-medium"
+          >
+            <span className="sr-only">Return</span>
+            <span>Return</span>
+          </Link>
+        )}
+      </div>
     </div>
   );
 };

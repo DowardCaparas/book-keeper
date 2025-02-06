@@ -1,16 +1,18 @@
 "use client";
 
 import { addCustomer, CustomerFormState } from "@/app/lib/actions";
-import { useActionState } from "react";
+import { useActionState, useTransition } from "react";
+import SubmitButton from "../submit-button";
 
 const CreateForm = () => {
   const initialState: CustomerFormState = { message: null, errors: {} };
   const [state, formAction] = useActionState(addCustomer, initialState);
+  const [isPending, startTransition] = useTransition();
 
   const className = "border rounded-lg p-3 mt-1";
 
   return (
-    <form action={formAction} className="flex flex-col gap-6">
+    <form action={(formData) => startTransition(() => formAction(formData))} className="flex flex-col gap-6">
 
       {/* Display validation message */}
       {state.message && (
@@ -98,10 +100,8 @@ const CreateForm = () => {
           }
       </div>
 
-
-      <button type="submit" className="bg-blue-500 text-white p-3 rounded-lg">
-        Add Customer
-      </button>
+       {/* Submit button with loading state */}
+       <SubmitButton isPending={isPending} innerText="Add Customer" innerText2="Adding Customer"/>
     </form>
   );
 };

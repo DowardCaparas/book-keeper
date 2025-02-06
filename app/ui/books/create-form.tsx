@@ -1,21 +1,26 @@
 "use client";
 
 import { addBook, BookAddFormState } from "@/app/lib/actions";
-import { useActionState } from "react";
+import { useActionState, useTransition } from "react";
+import SubmitButton from "../submit-button";
 
 const CreateForm = () => {
   const initialState: BookAddFormState = { message: null, errors: {} };
   const [state, formAction] = useActionState(addBook, initialState);
+  const [isPending, startTransition] = useTransition();
 
   const className = "border rounded-lg p-3 mt-1";
 
   return (
-    <form action={formAction} className="flex flex-col gap-6">
+    <form
+      action={(formData) => startTransition(() => formAction(formData))}
+      className="flex flex-col gap-6"
+    >
       {/* Display validation message */}
       {state.message && (
         <p className="text-sm text-red-500 text-center">{state.message}</p>
       )}
-      
+
       <div className="inline-grid">
         <label htmlFor="book_name">Book name</label>
         <input
@@ -26,7 +31,12 @@ const CreateForm = () => {
           aria-describedby="book-name-error"
         />
       </div>
-      <div className="-mt-5" id="book-name-error" aria-live="polite" aria-atomic="true">
+      <div
+        className="-mt-5"
+        id="book-name-error"
+        aria-live="polite"
+        aria-atomic="true"
+      >
         {state.errors?.bookName &&
           state.errors.bookName.map((error: string) => (
             <p className="text-sm text-red-500" key={error}>
@@ -45,10 +55,17 @@ const CreateForm = () => {
           aria-describedby="book-category-error"
         />
       </div>
-      <div className="-mt-5" id="book-category-error" aria-live="polite" aria-atomic="true">
+      <div
+        className="-mt-5"
+        id="book-category-error"
+        aria-live="polite"
+        aria-atomic="true"
+      >
         {state.errors?.bookCategory &&
           state.errors.bookCategory.map((error: string) => (
-            <p className="text-sm text-red-500" key={error}>{error}</p>
+            <p className="text-sm text-red-500" key={error}>
+              {error}
+            </p>
           ))}
       </div>
 
@@ -63,14 +80,18 @@ const CreateForm = () => {
           aria-describedby="book-quantity-error"
         />
       </div>
-      <div className="-mt-5" id="book-quantity-error" aria-live="polite" aria-atomic="true">
-          {state.errors?.quantity && 
-            state.errors.quantity.map((error: string) => (
-              <p className="text-sm text-red-500" key={error}>
-                {error}
-              </p>
-            ))
-          }
+      <div
+        className="-mt-5"
+        id="book-quantity-error"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        {state.errors?.quantity &&
+          state.errors.quantity.map((error: string) => (
+            <p className="text-sm text-red-500" key={error}>
+              {error}
+            </p>
+          ))}
       </div>
 
       <div className="inline-grid">
@@ -84,10 +105,8 @@ const CreateForm = () => {
           readOnly
         />
       </div>
-          
-      <button type="submit" className="bg-blue-500 text-white p-3 rounded-lg">
-        Add Book
-      </button>
+      {/* Submit button with loading state */}
+      <SubmitButton isPending={isPending} innerText="Add Book" innerText2="Adding Book"/>
     </form>
   );
 };

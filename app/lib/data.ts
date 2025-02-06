@@ -168,10 +168,11 @@ export const fetchFilteredTransactions = async (query: string, currentPage: numb
 
 export const fetchTransactionById = async (id: string) => {
   try {
-    const data = await sql<Transactions & Customers>`
-            SELECT transactions.*, customers.name, customers.email 
+    const data = await sql<Transactions & Customers & {quantity: number}>`
+            SELECT transactions.*, books.quantity, customers.name, customers.email 
             FROM transactions
-            JOIN customers ON transactions.customer_id = customers.id 
+            JOIN customers ON transactions.customer_id = customers.id
+            JOIN books ON transactions.book_id = books.id
             WHERE transactions.id = ${id}
         `;
 

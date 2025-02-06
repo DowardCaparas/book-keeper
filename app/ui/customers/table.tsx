@@ -39,8 +39,13 @@ const CustomerTable = async ({
               <td className="whitespace-nowrap p-3">{customer.contact}</td>
               <td className="whitespace-nowrap py-3 pl-6 pr-3">
                 <div className="flex justify-end gap-3">
-                  <GoToEditPage id={customer.id}/>
-                  <DeleteItem id={customer.id} itemName={customer.name} deleteFunction={deleteCustomer}/>
+                  <GoToEditPage id={customer.id} />
+                  <DeleteItem
+                    id={customer.id}
+                    itemName={customer.name}
+                    title="Delete Customer"
+                    deleteFunction={deleteCustomer}
+                  />
                 </div>
               </td>
             </tr>
@@ -51,9 +56,14 @@ const CustomerTable = async ({
       {/* UI for mobile or small screen sizes */}
       <div className="xl:hidden grid lg:grid-cols-2 sm:max-md:grid-cols-2 grid-cols-1 gap-4">
         {customers?.map((customer) => (
-          <div key={customer.id} className="bg-white rounded-lg px-5 py-8 border flex flex-col">
+          <div
+            key={customer.id}
+            className="bg-white rounded-lg px-5 py-8 border flex flex-col"
+          >
             <div className="inline-grid">
-              <span className="md:text-xl text-lg font-medium">{customer.name}</span>
+              <span className="md:text-xl text-lg font-medium">
+                {customer.name}
+              </span>
               <span>{customer.email}</span>
             </div>
             <div className="inline-grid my-5">
@@ -62,10 +72,15 @@ const CustomerTable = async ({
               Contact number:
               <span className="font-medium">{customer.contact}</span>
             </div>
-           <div className="flex gap-3">
-            <GoToEditPage id={customer.id}/>
-            <DeleteItem id={customer.id} itemName={customer.name} deleteFunction={deleteCustomer}/>
-           </div>
+            <div className="flex gap-3">
+              <GoToEditPage id={customer.id} />
+              <DeleteItem
+                id={customer.id}
+                itemName={customer.name}
+                title="Delete Customer"
+                deleteFunction={deleteCustomer}
+              />
+            </div>
           </div>
         ))}
       </div>

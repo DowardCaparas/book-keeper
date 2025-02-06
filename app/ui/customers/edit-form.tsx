@@ -2,17 +2,19 @@
 
 import { udpateCustomer, CustomerFormState } from "@/app/lib/actions";
 import { Customers } from "@/app/lib/definition";
-import { useActionState } from "react";
+import { useActionState, useTransition } from "react";
+import SubmitButton from "../submit-button";
 
 const EditForm = ({customer}: {customer: Customers}) => {
     const initialState: CustomerFormState = { message: null, errors: {} };
     const updateCustomerWithId = udpateCustomer.bind(null, customer.id);
     const [state, formAction] = useActionState(updateCustomerWithId, initialState);
+    const [isPending, startTransition] = useTransition();
 
     const className = "border rounded-lg p-3 mt-1";
 
   return (
-    <form action={formAction} className="flex flex-col gap-6">
+    <form action={(formData) => startTransition(() => formAction(formData))} className="flex flex-col gap-6">
       <div className="inline-grid">
         <label htmlFor="customer_name">Name</label>
         <input
@@ -89,10 +91,8 @@ const EditForm = ({customer}: {customer: Customers}) => {
           )}
       </div>
 
-
-      <button type="submit" className="bg-blue-500 text-white p-3 rounded-lg">
-        Save Changes
-      </button>
+       {/* Submit button with loading state */}
+       <SubmitButton isPending={isPending} innerText="Save Changes" innerText2="Saving"/>
     </form>
   )
 }

@@ -321,11 +321,9 @@ export const updateTransaction = async (id: string, formData: FormData) => {
 
   let status = "Available";
 
-  if (quantity >= 1) {
-    status = "Available";
-  } else {
+  if (quantity <= 0) {
     status = "Not available";
-  }
+  } 
 
   try {
     await sql`
@@ -342,6 +340,39 @@ export const updateTransaction = async (id: string, formData: FormData) => {
   } catch (error) {
     console.error("Database error:", error);
     throw new Error("Database error: Failed to update transaction");
+  }
+
+  revalidatePath("/dashboard/transactions");
+  redirect("/dashboard/transactions");
+};
+
+const UpdateDateReturnedTransaction = TransactionFormSchema.omit({
+  id: true,
+  customer_id: true,
+  book_id: true,
+  book_name: true,
+  book_category: true,
+  date_borrowed: true,
+  book_quantity: true
+});
+
+export const editDateReturnedTransaction = async (id: string, formData: FormData) => {
+  const { date_returned } = UpdateDateReturnedTransaction.parse({
+    date_returned: formData.get("date_returned"),
+  });
+
+  const date = formatDateToLocal(date_returned);
+
+  try {
+    await sql`
+        UPDATE transactions
+        SET date_returned = ${date}
+        WHERE transactions.id = ${id}
+        `;
+
+  } catch (error) {
+    console.error("Database error:", error);
+    throw new Error("Database error: Failed to update transaction date returned");
   }
 
   revalidatePath("/dashboard/transactions");

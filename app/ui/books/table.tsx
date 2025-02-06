@@ -56,8 +56,13 @@ const BooksTable = async ({
               <td className="whitespace-nowrap py-3 pl-6 pr-3">
                 <div className="flex justify-end gap-3">
                   {book.quantity > 0 && <BorrowBook id={book.id} />}
-                  <GoToEditPage id={book.id}/>
-                  <DeleteItem id={book.id} itemName={book.name} deleteFunction={deleteBook}/>
+                  <GoToEditPage id={book.id} />
+                  <DeleteItem
+                    id={book.id}
+                    itemName={book.name}
+                    title="Delete Book"
+                    deleteFunction={deleteBook}
+                  />
                 </div>
               </td>
             </tr>
@@ -76,7 +81,6 @@ const BooksTable = async ({
                 </span>
                 <span>{book.category}</span>
               </div>
-              <GoToEditPage id={book.id}/>
             </div>
             <div className="my-8">
               <span className="flex justify-between items-center">
@@ -98,7 +102,13 @@ const BooksTable = async ({
             </div>
             <div className="flex gap-3">
               {book.quantity > 0 && <BorrowBook id={book.id} />}
-              <DeleteItem id={book.id} itemName={book.name} deleteFunction={deleteBook}/>
+              <GoToEditPage id={book.id} />
+              <DeleteItem
+                id={book.id}
+                itemName={book.name}
+                title="Delete Book"
+                deleteFunction={deleteBook}
+              />
             </div>
           </div>
         ))}
